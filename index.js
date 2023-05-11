@@ -1,5 +1,6 @@
 const alphabet = [..."abcdefghijklmnopqrstuvwxyz"];
 let input = "";
+let randomCountryName = "";
 const flag = document.getElementById("flag");
 const results = document.getElementById("results");
 const results2 = document.getElementById("results-2");
@@ -12,7 +13,7 @@ printBtn = () => {
     var l = alphabet[i];
 
     btn.innerText = l;
-    btn.classList.add("alphabet-button");
+    btn.classList.add("button-57");
     buttonsContainer.appendChild(btn);
     // btn.addEventListener("click", () => {
     //   const input = l;
@@ -25,6 +26,7 @@ printBtn = () => {
         let input = l.toUpperCase();
         console.log(input); // do whatever you want with the input
         makeApiCall(input);
+        // recipeCall();
       });
     })(l);
   }
@@ -55,24 +57,37 @@ function makeApiCall(lett) {
         filteredCountries[Math.floor(Math.random() * filteredCountries.length)];
       console.log(randomCountry.name);
       console.log(randomCountry.capital);
+      let randomCountryName = randomCountry.name;
+      console.log(randomCountryName);
       flag.innerHTML = `<img src = ${randomCountry.flag} > `;
       results.innerHTML = ` Your Country is ${randomCountry.name}. It is known locally as ${randomCountry.nativeName}.\n
       It is located in ${randomCountry.subregion}. The capital city of ${randomCountry.name} is ${randomCountry.capital}. `;
-      results2.innerHTML = `${randomCountry.name} has a population of ${randomCountry.population}. The currency is the ${randomCountry.currencies[0].name} (${randomCountry.currencies[0].symbol}). The main language is ${randomCountry.languages[0].name} `;
+      results2.innerHTML = `${randomCountry.name} has a population of ${randomCountry.population} people. The currency is the ${randomCountry.currencies[0].name} (${randomCountry.currencies[0].symbol}). The main language is ${randomCountry.languages[0].name} `;
     })
     .catch((error) => {
       console.error(error);
     });
 }
 
-makeApiCall();
-// var buttons = document.querySelectorAll(".alphabet-button");
+// function recipeCall() {
+//   const APP_ID = "4cdf489b";
+//   const APP_KEY = "d75a9d1345b14f9a00846fd507bc89bd";
+//   let QUERY = randomCountryName;
+//   const API_URL =
+//     "https://api.edamam.com/api/recipes/v2?type=public&q=" +
+//     QUERY +
+//     "&app_id=" +
+//     APP_ID +
+//     "&app_key=" +
+//     APP_KEY;
+//   console.log(randomCountryName);
+//   fetch(API_URL)
+//     .then((response) => response.json())
+//     .then((data) => {
+//       // Use the retrieved data here
+//       console.log(data);
+//     })
+//     .catch((error) => console.error(error));
+// }
 
-// buttons.forEach((button) => {
-//   button.addEventListener("click", (event) => {
-//     const input = event.target.innerText;
-//     console.log(event.target.innerText);
-//     console.log(input);
-//   });
-// });
-// Make a request to the REST Countries API to retrieve information about all countries
+// makeApiCall();
